@@ -2,7 +2,11 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 
-SRC = src/fdf.c
+SRC = src/fdf.c \
+src/map_parsing.c \
+src/utils.c \
+src/is_check.c \
+
 MLX = ./minilibx-linux
 
 OBJS = $(SRC:.c=.o)

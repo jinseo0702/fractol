@@ -10,13 +10,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-typedef struct s_map
+typedef struct s_value
 {
 	int				x;
 	int				y;
 	int             z;
     char            *color;
-}   t_map;
+}   t_value;
+
+typedef struct s_map
+{
+	int high;
+	int width;
+}	t_map;
+
 
 typedef struct  s_data
 {
@@ -33,9 +40,15 @@ typedef struct  s_mlx
     void *win;
 }   t_mlx;
 
-void init_arry(t_map map[860][540]);
-void passing_map(t_map map[860][540], int fd);
-void insert_arry(t_map map[860][540]);
-void	ft_strfree(char **split_argv, int idx);
+//map parsing.c
+void linenb(char *str, int *high , int *widh);
+void init_map(t_map *map);
+void init_value(t_value *value);
+t_value **alc_map(int high, int width);
+//utils.c
+void free_two_arry(char **str, char *lstr, int flag);
+void ft_error(char *str);
+//is_check.c
+void is_vaild(char *str, int fd);
 
 # endif
