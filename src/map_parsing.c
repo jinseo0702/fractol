@@ -38,25 +38,25 @@ void linenb(char *str, int *high , int *width)
 	close(fd);
 }
 
-t_value **alc_map(int high, int width)
+t_value ***alc_map(int high, int width)
 {
 	int idx;
 	int idx2;
-	t_value **value;
+	t_value ***value;
 
 	idx = -1;
-	value = (t_value **)malloc(sizeof(t_value *) * high);
+	value = (t_value ***)malloc(sizeof(t_value **) * high);
 	if (!value)
 		ft_error("not allocated malloc");
 	while (++idx < high)
 	{
-		value[idx] = (t_value *)malloc(sizeof(t_value *) * width);
+		value[idx] = (t_value **)malloc(sizeof(t_value *) * width);
 		if (!&value[idx])
 			ft_error("not allocated malloc");//이부분은 누수관리가 필요함.
 		idx2 = -1;
 		while(++idx2 < width)
 		{
-			init_value(&value[idx][idx2]);
+			init_value(value[idx][idx2]);
 		}
 	}
 	return (value);

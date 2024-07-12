@@ -44,7 +44,7 @@ typedef struct  s_mlx
 void linenb(char *str, int *high , int *widh);
 void init_map(t_map *map);
 void init_value(t_value *value);
-t_value **alc_map(int high, int width);
+t_value ***alc_map(int high, int width);
 //utils.c
 void free_two_arry(char **str, char *lstr, int flag);
 void ft_error(char *str);
