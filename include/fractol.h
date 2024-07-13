@@ -41,13 +41,15 @@ typedef struct  s_mlx
 }   t_mlx;
 
 //map parsing.c
+void init_map(t_map *map, char *str);
 void linenb(char *str, int *high , int *widh);
-void init_map(t_map *map);
 void init_value(t_value *value);
 t_value ***alc_map(int high, int width);
+void map_parsing(t_value ***value, char *str, t_map *map);
 //utils.c
 void free_two_arry(char **str, char *lstr, int flag);
 void ft_error(char *str);
+void free_value(t_value ***value, t_map *map);
 //is_check.c
 void is_vaild(char *str, int fd);
 

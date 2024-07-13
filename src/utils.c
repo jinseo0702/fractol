@@ -23,6 +23,30 @@ void free_two_arry(char **str, char *lstr, int flag)
 	}
 }
 
+void free_value(t_value ***value, t_map *map)
+{
+	int idx1;
+	int idx2;
+
+	idx1 = 0;
+	while (idx1 < map->high)
+	{
+		idx2 = 0;
+		while (idx2 < map->width)
+		{
+			free(value[idx1][idx2]->color);
+			value[idx1][idx2]->color = NULL;
+			free(value[idx1][idx2]);
+			value[idx1][idx2] = NULL;
+			idx2++;
+		}
+		free(value[idx1]);
+		value[idx1] = NULL;
+		idx1++;
+	}
+	free(value);
+}
+
 void ft_error(char *str)
 {
 	ft_putendl_fd(str, 2);

@@ -1,10 +1,12 @@
 #include "../include/fractol.h"
+//this version is  check malloc t_value before problem is allocated appropriately
+//so make error but modify
+//check printf comment.
 
-void init_map(t_map *map, char *str)
+void init_map(t_map *map)
 {
 	map->high = 0;
 	map->width = 0;
-	linenb(str, &map->high, &map->width);
 }
 
 void init_value(t_value *value)
@@ -62,6 +64,7 @@ t_value ***alc_map(int high, int width)//3차원 배열을 free해주는 건 아
 				ft_error("not allocated malloc");
 			init_value(value[idx][idx2]);
 		}
+		printf("alc map idx2 %d \n", idx2);//에러내용 메모리를 할당할때 알맞게 해서 문제가 생긴다. + 1씩 더해 주자
 	}
 	return (value);
 }
@@ -71,7 +74,6 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 	int fd;
 	int idx1;
 	int idx2;
-	int idx_s;
 	char *temp;
 	char **two;
 
@@ -80,18 +82,16 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 	idx1 = 0;
 	while ((temp = get_next_line(fd)))
 	{
-		idx2 = -1;
+		idx2 = 0;
 		two = ft_split(temp, ' ');
-		idx_s = -1;
-		while (two[++idx_s] && ++idx2 < map->width)
+		while (two[idx1] && idx2 < map->width)
 		{
+			printf("%d, idx2 %d \n", value[idx1][idx2]->x, idx2);
 			value[idx1][idx2]->x = idx2;
 			value[idx1][idx2]->y = idx1;
-			value[idx1][idx2]->z = ft_atoi(two[idx_s]);
-			if (ft_strchr(two[idx_s], ',') && !ft_strncmp(ft_strchr(two[idx_s], ',') + 1, "0x", 2))
-				value[idx1][idx2]->color = ft_strdup(ft_strchr(two[idx_s], ',') + 1);
-			else
-				value[idx1][idx2]->color = NULL;
+			value[idx1][idx2]->z = ft_atoi(two[idx1]);//색 표현은 아직 만지지 않았음 추가해야함
+			value[idx1][idx2]->color = NULL;
+			idx2++;
 		}
 		free_two_arry(two, NULL, 2);
 		free_two_arry(NULL, temp, 1);
