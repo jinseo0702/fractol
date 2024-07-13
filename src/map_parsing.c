@@ -12,7 +12,7 @@ void init_value(t_value *value)
 	value->x = 0;
 	value->y = 0;
 	value->z = 0;
-	value->color = NULL;
+	value->color = 0;
 }
 
 void linenb(char *str, int *high , int *width)
@@ -85,8 +85,8 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 		idx_s = -1;
 		while (two[++idx_s] && ++idx2 < map->width)
 		{
-			value[idx1][idx2]->x = idx2;
-			value[idx1][idx2]->y = idx1;
+			value[idx1][idx2]->x = ((idx2) - idx1) * cos(45);//*구하는 함수를 만들면 된다냥!
+			value[idx1][idx2]->y = (idx2 + (idx1)) * sin(45) - ft_atoi(two[idx_s]);
 			value[idx1][idx2]->z = ft_atoi(two[idx_s]);
 			if (ft_strchr(two[idx_s], ',') && !ft_strncmp(ft_strchr(two[idx_s], ',') + 1, "0x", 2))
 				value[idx1][idx2]->color = ft_strdup(ft_strchr(two[idx_s], ',') + 1);

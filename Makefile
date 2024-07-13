@@ -6,6 +6,7 @@ SRC = src/fdf.c \
 src/map_parsing.c \
 src/utils.c \
 src/is_check.c \
+src/my_mlx.c \
 
 MLX = ./minilibx-linux
 
@@ -33,7 +34,7 @@ fclean :
 	@$(RM) $(OBJS) $(NAME)
 
 re : 
-	make fclean
-	make all
+	@make fclean
+	@make all
 
 .PHONY: all clean fclean re

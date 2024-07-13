@@ -34,8 +34,7 @@ void free_value(t_value ***value, t_map *map)
 		idx2 = 0;
 		while (idx2 < map->width)
 		{
-			free(value[idx1][idx2]->color);
-			value[idx1][idx2]->color = NULL;
+
 			free(value[idx1][idx2]);
 			value[idx1][idx2] = NULL;
 			idx2++;
@@ -51,4 +50,22 @@ void ft_error(char *str)
 {
 	ft_putendl_fd(str, 2);
 	exit(1);
+}
+
+int hex_base(char *nptr)
+{
+	int	nb;
+	char *nptr2;
+
+	if ((void *)nptr == NULL)
+		return (0xFFFFFF);
+	nb = 0;
+	nptr2 = ft_strdup(strchr(nptr, 'x') + 1);
+	while (*nptr2)
+	{
+		nb = (*nptr - 48) + (nb * 16);
+		nptr++;
+	}
+	free(nptr2);
+	return (nb);
 }

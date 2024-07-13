@@ -9,6 +9,7 @@
 # include "../ft_printf/libftprintf.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 
 typedef struct s_value
 {
@@ -50,7 +51,11 @@ void map_parsing(t_value ***value, char *str, t_map *map);
 void free_two_arry(char **str, char *lstr, int flag);
 void ft_error(char *str);
 void free_value(t_value ***value, t_map *map);
+int hex_base(char *nptr);
 //is_check.c
 void is_vaild(char *str, int fd);
+//mt_mlx.c
+void my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void init_mlx(t_mlx *mlx, t_data *data, t_map *map, t_value ***value);
 
 # endif
