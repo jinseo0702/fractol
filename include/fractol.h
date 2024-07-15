@@ -16,7 +16,7 @@ typedef struct s_value
 	int				x;
 	int				y;
 	int             z;
-    char            *color;
+    int            color;
 }   t_value;
 
 typedef struct s_map

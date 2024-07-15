@@ -88,8 +88,10 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 			value[idx1][idx2]->x = ((idx2) - idx1) * cos(45);//*구하는 함수를 만들면 된다냥!
 			value[idx1][idx2]->y = (idx2 + (idx1)) * sin(45) - ft_atoi(two[idx_s]);
 			value[idx1][idx2]->z = ft_atoi(two[idx_s]);
-			// if (ft_strchr(two[idx_s], ',') && !ft_strncmp(ft_strchr(two[idx_s], ',') + 1, "0x", 2))
-				value[idx1][idx2]->color = hex_base(ft_strchr(two[idx_s], ',') + 1);
+			if (ft_strchr(two[idx_s], ',') && !ft_strncmp(ft_strchr(two[idx_s], ',') + 1, "0x", 2))
+				value[idx1][idx2]->color = ft_strdup(ft_strchr(two[idx_s], ',') + 1);
+			else
+				value[idx1][idx2]->color = NULL;
 		}
 		free_two_arry(two, NULL, 2);
 		free_two_arry(NULL, temp, 1);

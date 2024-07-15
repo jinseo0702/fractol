@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 
-SRC = test_split.c
+SRC = test_cindex.c
 OBJS = $(SRC:.c=.o)
 NAME = test
 

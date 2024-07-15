@@ -61,10 +61,6 @@ int hex_base(char *nptr)
 	hex_base = "0123456789abcedf";
 	if ((void *)nptr == NULL)
 		return (0xFFFFFF);
-	if (nptr[1] == '\0')
-		return (0xFFFFFF);
-	if (!ft_strchr(nptr, ',') && ft_strncmp(ft_strchr(nptr, ',') + 1, "0x", 2))
-		return (0xFFFFFF);
 	nb = 0;
 	nptr2 = (strchr(nptr, 'x') + 1);
 	while (*nptr2)
