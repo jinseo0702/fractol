@@ -19,9 +19,8 @@ void init_mlx(t_mlx *mlx, t_data *data, t_map *map, t_value ***value)
     {
         for (int i = 0; i < map->width; i++)
         {
-            // printf("%d %d %d %d %d\n", i, count, value[count][i]->x, value[count][i]->y, value[count][i]->color);
-            // printf("%d\n", value[count][i]->color);
-            my_mlx_pixel_put(data, (value[count][i]->x + 300), (value[count][i]->y + 100), value[count][i]->color);
+            // printf("x %d y %d rx %d ry%d c %d\n", i, count, value[count][i]->x, value[count][i]->y, value[count][i]->color);
+            my_mlx_pixel_put(data, (value[count][i]->x), (value[count][i]->y), value[count][i]->color);
         }
     }
     mlx_put_image_to_window(mlx->mlx, mlx->win, data->img, 0, 0);

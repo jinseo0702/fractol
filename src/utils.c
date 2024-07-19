@@ -54,23 +54,44 @@ void ft_error(char *str)
 
 int hex_base(char *nptr)
 {
-	long int	nb;
-	char *nptr2;
-	char *hex_base;
+	int nb;
+	char **two;
+	int idx;
 
-	hex_base = "0123456789abcedf";
-	if ((void *)nptr == NULL)
-		return (0xFFFFFF);
-	if (nptr[1] == '\0')
-		return (0xFFFFFF);
-	if (!ft_strchr(nptr, ',') && ft_strncmp(ft_strchr(nptr, ',') + 1, "0x", 2))
-		return (0xFFFFFF);
 	nb = 0;
-	nptr2 = (strchr(nptr, 'x') + 1);
-	while (*nptr2)
+	idx = -1;
+	if (is_comma(nptr))
 	{
-		nb = (ft_strchr(hex_base, ft_tolower(*nptr2)) - hex_base) + (nb * 16);
-		nptr2++;
+		two = ft_split(nptr, ',');
+		while(two[1][++idx])
+			two[1][idx] = ft_tolower(two[1][idx]);
+		idx = 2;
+		while (ft_isalnum(two[1][idx]))
+		{
+			if (ft_isalnum(two[1][idx]) == 10)
+				nb = (two[1][idx] - 48) + (nb * 16);
+			else if (ft_isalnum(two[1][idx]) == 8)
+				nb = (two[1][idx] - 87) + (nb * 16);
+			idx++;
+		}
+		free_two_arry(two, NULL, 2);
+		return (nb);
 	}
-	return (nb);
+	else
+		return (0xFFFFFF);
+}
+
+int is_comma(char *nptr)
+{
+	int idx;
+
+	idx = 0;
+	while (nptr[idx])
+	{
+		if (nptr[idx] == ',')
+			if(!ft_strncmp(&nptr[idx], ",0x", 3))
+			return (idx + 3);
+		idx++;
+	}
+	return (0);
 }

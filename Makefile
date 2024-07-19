@@ -7,6 +7,7 @@ src/map_parsing.c \
 src/utils.c \
 src/is_check.c \
 src/my_mlx.c \
+src/utils2.c \
 
 MLX = ./minilibx-linux
 

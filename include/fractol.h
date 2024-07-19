@@ -52,6 +52,9 @@ void free_two_arry(char **str, char *lstr, int flag);
 void ft_error(char *str);
 void free_value(t_value ***value, t_map *map);
 int hex_base(char *nptr);
+int is_comma(char *nptr);
+//utils2.c
+int ft_abs(int x);
 //is_check.c
 void is_vaild(char *str, int fd);
 //mt_mlx.c

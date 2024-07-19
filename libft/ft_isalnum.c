@@ -20,6 +20,6 @@ int	ft_isalnum(int c)
 	if ((as >= 'a' && as <= 'z') || (as >= 'A' && as <= 'Z'))
 		return (8);
 	if (as >= '0' && as <= '9')
-		return (8);
+		return (10);
 	return (0);
 }
