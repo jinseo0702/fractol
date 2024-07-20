@@ -41,6 +41,22 @@ typedef struct  s_mlx
     void *win;
 }   t_mlx;
 
+typedef struct s_draw
+{
+    int xa;
+    int xb;
+    int ya;
+    int yb;
+    int add_x;
+    int add_y;
+    int dx;
+    int dy;
+    int diff;
+    int delta;
+    int i;
+    int j;
+}   t_draw;
+
 //map parsing.c
 void init_map(t_map *map, char *str);
 void linenb(char *str, int *high , int *widh);
@@ -63,5 +79,8 @@ void is_vaild(char *str, int fd);
 //mt_mlx.c
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void init_mlx(t_mlx *mlx, t_data *data, t_map *map, t_value ***value);
+void init_draw(t_draw *draw);
+// bresenham.c
+void    ft_bresenham(t_draw *draw, int color, t_data *img);
 
 # endif

@@ -89,9 +89,9 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 		idx_s = -1;
 		while (two[++idx_s] && ++idx2 < map->width)
 		{
-			value[idx1][idx2]->x = ((idx2) - idx1) * cos(45);//*구하는 함수를 만들면 된다냥!
-			value[idx1][idx2]->y = (idx2 + (idx1)) * sin(45) - ft_atoi(two[idx_s]);
 			value[idx1][idx2]->z = ft_atoi(two[idx_s]);
+			value[idx1][idx2]->x = ((idx2) - idx1) * cos(45);//*구하는 함수를 만들면 된다냥!
+			value[idx1][idx2]->y = (idx2 + (idx1)) * sin(45) - value[idx1][idx2]->z;
 			value[idx1][idx2]->color = hex_base(two[idx_s]);
 			if (x > value[idx1][idx2]->x)
 				x = value[idx1][idx2]->x;
@@ -138,7 +138,7 @@ int is_outx(int x)
 
 	while (i > 0)
 	{
-		if (i * x < 1920)
+		if (i * x < 860)
 			return (i);
 		--i;
 	}
@@ -185,7 +185,7 @@ void is_max(t_value ***value, t_map *map)
 		idx2 = 0;
 		while (idx2 < map->width)
 		{
-			value[idx1][idx2]->x *= is_outx(x_m);
+			value[idx1][idx2]->x *= is_outy(y_m);
 			value[idx1][idx2]->y *= is_outy(y_m);
 			idx2++;
 		}

@@ -8,6 +8,7 @@ src/utils.c \
 src/is_check.c \
 src/my_mlx.c \
 src/utils2.c \
+src/bresenham.c \
 
 MLX = ./minilibx-linux
 
