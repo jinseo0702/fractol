@@ -106,6 +106,11 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 		free_two_arry(NULL, temp, 1);
 		idx1++;
 	}
+	if (ft_abs(x) > x_m)
+		x_m = ft_abs(x);
+	if (ft_abs(y) > y_m)
+		y_m = ft_abs(y);
+	// printf("%d %d %d %d\n", x, y, x_m, y_m);
 	idx1 = 0;
 	while (idx1 < map->high)
 	{
@@ -115,14 +120,76 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 			if (x < 0)
 				value[idx1][idx2]->x += ft_abs(x);
 			if (y < 0)
-				value[idx1][idx2]->y += ft_abs(y);			
-			if (1920 / x_m)
-				value[idx1][idx2]->x *= (860 / x_m);
-			if (1080 / y_m)
-				value[idx1][idx2]->y *= (540 / y_m);
+				value[idx1][idx2]->y += ft_abs(y);
+			// value[idx1][idx2]->x *= is_out(x_m, y_m);
+			// value[idx1][idx2]->y *= is_out(x_m, y_m);
+			// printf ("%d x %d y %d\n", is_outx(x_m), value[idx1][idx2]->x, value[idx1][idx2]->y);
 			idx2++;
 		}
 		idx1++;
 	}
+	is_max(value, map);
 	close(fd);
+}
+
+int is_outx(int x)
+{
+	int i = 500;
+
+	while (i > 0)
+	{
+		if (i * x < 1920)
+			return (i);
+		--i;
+	}
+	return (1);
+}
+
+int is_outy(int y)
+{
+	int i = 500;
+
+	while (i > 0)
+	{
+		if (i * y < 1080)
+			return (i);
+		--i;
+	}
+	return (1);
+}
+
+void is_max(t_value ***value, t_map *map)
+{
+	int idx1 = 0;
+	int idx2 = 0;
+	int x_m = 0;
+	int y_m = 0;
+
+	idx1 = 0;
+	while (idx1 < map->high)
+	{
+		idx2 = 0;
+		while (idx2 < map->width)
+		{
+			if (x_m < value[idx1][idx2]->x)
+				x_m = value[idx1][idx2]->x;
+			if (y_m < value[idx1][idx2]->y)
+				y_m = value[idx1][idx2]->y;
+			idx2++;
+		}
+		idx1++;
+	}
+	idx1 = 0;
+	while (idx1 < map->high)
+	{
+		idx2 = 0;
+		while (idx2 < map->width)
+		{
+			value[idx1][idx2]->x *= is_outx(x_m);
+			value[idx1][idx2]->y *= is_outy(y_m);
+			idx2++;
+		}
+		idx1++;
+	}
+
 }

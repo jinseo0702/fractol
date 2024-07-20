@@ -47,6 +47,9 @@ void linenb(char *str, int *high , int *widh);
 void init_value(t_value *value);
 t_value ***alc_map(int high, int width);
 void map_parsing(t_value ***value, char *str, t_map *map);
+int is_outx(int x);
+int is_outy(int y);
+void is_max(t_value ***value, t_map *map);
 //utils.c
 void free_two_arry(char **str, char *lstr, int flag);
 void ft_error(char *str);
