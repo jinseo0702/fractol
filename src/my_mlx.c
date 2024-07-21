@@ -21,7 +21,7 @@ void init_mlx(t_mlx *mlx, t_data *data, t_map *map, t_value ***value)
     {
         for (int i = 0; i < map->width; i++)
         {
-            if (i + 1 < map->width)
+            if (i < map->width -1)
             {
                 j = i + 1;
                 init_draw(&draw);
@@ -29,16 +29,18 @@ void init_mlx(t_mlx *mlx, t_data *data, t_map *map, t_value ***value)
                 draw.ya = value[count][i]->y;
                 draw.xb = value[count][j]->x;
                 draw.yb = value[count][j]->y;
+                // printf("xa %d ya %d xb %d yb %d \n", draw.xa, draw.ya, draw.xb, draw.yb);
              ft_bresenham(&draw, value[count][i]->color, data);
             }
-            if (count + 1 < map->high)
+            // printf("x %d y %d\n", value[count][i]->x, value[count][i]->y);
+            if (count < map->high - 1)
             {
                 init_draw(&draw);
                 draw.xa = value[count][i]->x;
                 draw.ya = value[count][i]->y;
                 draw.xb = value[count+1][i]->x;
                 draw.yb = value[count+1][i]->y;
-                ft_bresenham(&draw, value[count][i]->color, data);
+                // ft_bresenham(&draw, value[count][i]->color, data);
             }
             // my_mlx_pixel_put(data, (value[count][i]->x), (value[count][i]->y), value[count][i]->color);
         }

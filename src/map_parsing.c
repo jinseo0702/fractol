@@ -82,26 +82,32 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 	if ((fd = open(str, O_RDONLY)) < 0)
 		ft_error("file is not open! retry");
 	idx1 = 0;
-	while ((temp = get_next_line(fd)))
+	while (idx1 < map->high)
 	{
+		temp = get_next_line(fd);
 		idx2 = -1;
 		two = ft_split(temp, ' ');
 		idx_s = -1;
-		while (two[++idx_s] && ++idx2 < map->width)
+		while (two[++idx_s])
 		{
-			value[idx1][idx2]->z = ft_atoi(two[idx_s]);
-			value[idx1][idx2]->x = ((idx2) - idx1) * cos(45);//*구하는 함수를 만들면 된다냥!
-			value[idx1][idx2]->y = (idx2 + (idx1)) * sin(45) - value[idx1][idx2]->z;
-			value[idx1][idx2]->color = hex_base(two[idx_s]);
-			if (x > value[idx1][idx2]->x)
-				x = value[idx1][idx2]->x;
-			if (y > value[idx1][idx2]->y)
-				y = value[idx1][idx2]->y;
-			if (x_m < value[idx1][idx2]->x)
-				x_m = value[idx1][idx2]->x;
-			if (y_m < value[idx1][idx2]->y)
-				y_m = value[idx1][idx2]->y;
+			value[idx1][idx_s]->z = ft_atoi(two[idx_s]);
+			value[idx1][idx_s]->x = ((idx_s) - idx1) * cos(45);
+			value[idx1][idx_s]->y = ((idx_s + (idx1)) * sin(45)) - ft_atoi(two[idx_s]);
+			printf("(%d, %d     )", idx1, idx_s);
+			// value[idx1][idx_s]->x = idx1;
+			// value[idx1][idx_s]->y = idx_s;
+
+			value[idx1][idx_s]->color = hex_base(two[idx_s]);
+			if (x > value[idx1][idx_s]->x)
+				x = value[idx1][idx_s]->x;
+			if (y > value[idx1][idx_s]->y)
+				y = value[idx1][idx_s]->y;
+			if (x_m < value[idx1][idx_s]->x)
+				x_m = value[idx1][idx_s]->x;
+			if (y_m < value[idx1][idx_s]->y)
+				y_m = value[idx1][idx_s]->y;
 		}
+		printf("\n");
 		free_two_arry(two, NULL, 2);
 		free_two_arry(NULL, temp, 1);
 		idx1++;
@@ -151,7 +157,7 @@ int is_outy(int y)
 
 	while (i > 0)
 	{
-		if (i * y < 1080)
+		if (i * y < 540)
 			return (i);
 		--i;
 	}
@@ -185,8 +191,10 @@ void is_max(t_value ***value, t_map *map)
 		idx2 = 0;
 		while (idx2 < map->width)
 		{
-			value[idx1][idx2]->x *= is_outy(y_m);
+			value[idx1][idx2]->x *= is_outx(x_m);
 			value[idx1][idx2]->y *= is_outy(y_m);
+			value[idx1][idx2]->x += 30;
+			value[idx1][idx2]->y += 30;
 			idx2++;
 		}
 		idx1++;
