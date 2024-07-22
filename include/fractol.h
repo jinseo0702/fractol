@@ -13,8 +13,8 @@
 
 typedef struct s_value
 {
-	int				x;
-	int				y;
+	double				x;
+	double				y;
 	int             z;
     int            color;
 }   t_value;

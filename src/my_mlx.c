@@ -40,10 +40,12 @@ void init_mlx(t_mlx *mlx, t_data *data, t_map *map, t_value ***value)
                 draw.ya = value[count][i]->y;
                 draw.xb = value[count+1][i]->x;
                 draw.yb = value[count+1][i]->y;
-                // ft_bresenham(&draw, value[count][i]->color, data);
+                ft_bresenham(&draw, value[count][i]->color, data);
             }
-            // my_mlx_pixel_put(data, (value[count][i]->x), (value[count][i]->y), value[count][i]->color);
+			// printf("(%d %d)", (int)value[count][i]->x, (int)value[count][i]->y);
+            my_mlx_pixel_put(data, (value[count][i]->x), (value[count][i]->y), value[count][i]->color);
         }
+        printf("\n");
     }
     mlx_put_image_to_window(mlx->mlx, mlx->win, data->img, 0, 0);
     mlx_loop(mlx->mlx);

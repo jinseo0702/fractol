@@ -9,8 +9,8 @@ void init_map(t_map *map, char *str)
 
 void init_value(t_value *value)
 {
-	value->x = 0;
-	value->y = 0;
+	value->x = 30;
+	value->y = 30;
 	value->z = 0;
 	value->color = 0;
 }
@@ -90,10 +90,14 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 		idx_s = -1;
 		while (two[++idx_s])
 		{
+			value[idx1][idx_s]->x += (idx_s - idx1) * cos(45);
+			value[idx1][idx_s]->y += (idx_s + idx1) * sin(45) - ft_atoi(two[idx_s]);
 			value[idx1][idx_s]->z = ft_atoi(two[idx_s]);
-			value[idx1][idx_s]->x = ((idx_s) - idx1) * cos(45);
-			value[idx1][idx_s]->y = ((idx_s + (idx1)) * sin(45)) - ft_atoi(two[idx_s]);
-			printf("(%d, %d     )", idx1, idx_s);
+			// printf("(%fd %fd)", value[idx1][idx_s]->x, value[idx1][idx_s]->y);
+			if (value[idx1][idx_s]->z > 9)
+				printf(" ");
+			else
+				printf("  ");
 			// value[idx1][idx_s]->x = idx1;
 			// value[idx1][idx_s]->y = idx_s;
 
@@ -118,22 +122,22 @@ void map_parsing(t_value ***value, char *str, t_map *map)
 		y_m = ft_abs(y);
 	// printf("%d %d %d %d\n", x, y, x_m, y_m);
 	idx1 = 0;
-	while (idx1 < map->high)
-	{
-		idx2 = 0;
-		while (idx2 < map->width)
-		{
-			if (x < 0)
-				value[idx1][idx2]->x += ft_abs(x);
-			if (y < 0)
-				value[idx1][idx2]->y += ft_abs(y);
-			// value[idx1][idx2]->x *= is_out(x_m, y_m);
-			// value[idx1][idx2]->y *= is_out(x_m, y_m);
-			// printf ("%d x %d y %d\n", is_outx(x_m), value[idx1][idx2]->x, value[idx1][idx2]->y);
-			idx2++;
-		}
-		idx1++;
-	}
+	// while (idx1 < map->high)
+	// {
+	// 	idx2 = 0;
+	// 	while (idx2 < map->width)
+	// 	{
+	// 		if (x < 0)
+	// 			value[idx1][idx2]->x += ft_abs(x);
+	// 		if (y < 0)
+	// 			value[idx1][idx2]->y += ft_abs(y);
+	// 		// value[idx1][idx2]->x *= is_out(x_m, y_m);
+	// 		// value[idx1][idx2]->y *= is_out(x_m, y_m);
+	// 		// printf ("%d x %d y %d\n", is_outx(x_m), value[idx1][idx2]->x, value[idx1][idx2]->y);
+	// 		idx2++;
+	// 	}
+	// 	idx1++;
+	// }
 	is_max(value, map);
 	close(fd);
 }
@@ -191,7 +195,7 @@ void is_max(t_value ***value, t_map *map)
 		idx2 = 0;
 		while (idx2 < map->width)
 		{
-			value[idx1][idx2]->x *= is_outx(x_m);
+			value[idx1][idx2]->x *= is_outx(y_m);
 			value[idx1][idx2]->y *= is_outy(y_m);
 			value[idx1][idx2]->x += 30;
 			value[idx1][idx2]->y += 30;
